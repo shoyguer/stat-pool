@@ -275,6 +275,6 @@ jobs:
       - name: Upload final artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "finished_unzip_me"
+          name: "Release File"
           path: "${{ env.PLUGIN_NAME }}.zip"
           retention-days: 1
