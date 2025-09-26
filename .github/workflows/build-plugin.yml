@@ -2,6 +2,11 @@ name: Build Cross Platform Plugin
 on:
   workflow_dispatch:
     inputs:
+      version:
+        description: 'Version to release (e.g., 1.1, 2.0.1)'
+        required: true
+        type: string
+        default: '1.0'
       build_type:
         description: |
           Select build type:
@@ -12,7 +17,7 @@ on:
         options:
           - debug
           - full_plugin_compilation
-        default: debug
+        default: full_plugin_compilation
       precision:
         description: |
           Select float precision for floating-point calculations in the GDExtension:
@@ -129,6 +134,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
+
+      - name: Download updated files
+        uses: actions/download-artifact@v4
+        with:
+          name: updated-files
+          path: ./
 
       - name: Set build name
         id: set-build-name
@@ -261,8 +272,6 @@ jobs:
         run: |
           if [ -f "brand/source/editor_icon.svg" ]; then
             cp "brand/source/editor_icon.svg" "${{ env.PLUGIN_NAME }}/stat_pool.svg"
-          else
-            echo "Icon file not found: brand/source/editor_icon.svg"
           fi
 
       # Copy LICENSE file if it exists
@@ -287,3 +296,43 @@ jobs:
           name: "Release File"
           path: "${{ env.PLUGIN_NAME }}.zip"
           retention-days: 1
+
+  release:
+    runs-on: ubuntu-22.04
+    needs: merge
+    permissions:
+      contents: write
+    steps:
+      - name: Download release artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "Release File"
+          path: ./
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Create the release with the specified tag and name
+          gh release create "${{ github.event.inputs.version }}" \
+            --title "${{ github.event.inputs.version }} - Release" \
+            --notes "## Release ${{ github.event.inputs.version }}
+
+          Automated release of ${{ env.PLUGIN_NAME }} version ${{ github.event.inputs.version }}.
+
+          ### Build Configuration:
+          - Build Type: ${{ github.event.inputs.build_type }}
+          - Float Precision: ${{ github.event.inputs.precision }}
+          - LTO: ${{ github.event.inputs.lto }}
+
+          ### Installation:
+          1. Download the \`${{ env.PLUGIN_NAME }}.zip\` file below
+          2. Extract it to your Godot project's \`addons/\` directory
+          3. Enable the plugin in your project settings
+
+          ### What's included:
+          - Cross-platform binaries for all supported platforms
+          - Plugin configuration files
+          - Documentation and license" \
+            --target "${{ github.ref }}" \
+            "${{ env.PLUGIN_NAME }}.zip"

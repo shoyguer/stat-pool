@@ -7,7 +7,7 @@
 		Component for tracking any numeric stat pool, for example: health, stamina, hunger, etc, where you have current, maximum and minimum values.
 		Handles value modifications, boundary management, and emits various signals for value changes.
 
-		Check the [url=https://github.com/shoyguer/godot-stat-pool][b]Official Repository[/b][/url] for more information.
+		Check the [url=https://github.com/shoyguer/stat-pool][b]Official Repository[/b][/url] for more information.
 	</description>
 	<tutorials>
 	</tutorials>
