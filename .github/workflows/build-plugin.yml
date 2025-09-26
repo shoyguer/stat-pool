@@ -1,4 +1,4 @@
-name: Build GDExtension Cross Platform Plugin
+name: Build Cross Platform Plugin
 on:
   workflow_dispatch:
     inputs:
@@ -254,6 +254,15 @@ jobs:
         run: |
           if [ -f "test_project/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_NAME }}.gdextension" ]; then
             cp "test_project/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_NAME }}.gdextension" "${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_NAME }}.gdextension"
+          fi
+      
+      # Copy and rename plugin icon
+      - name: Copy and rename plugin icon
+        run: |
+          if [ -f "brand/source/editor_icon.svg" ]; then
+            cp "brand/source/editor_icon.svg" "${{ env.PLUGIN_NAME }}/stat_pool.svg"
+          else
+            echo "Icon file not found: brand/source/editor_icon.svg"
           fi
 
       # Copy LICENSE file if it exists
