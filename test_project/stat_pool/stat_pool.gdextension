@@ -2,6 +2,9 @@
 entry_symbol = "stat_pool_init"
 compatibility_minimum = "4.5"
 
+[icons]
+StatPool = "./stat_pool.svg"
+
 [libraries]
 ; Relative paths ensure that our GDExtension can be placed anywhere in the project directory.
 macos.debug = "./bin/macos/libstat_pool.macos.template_debug.single.framework"
