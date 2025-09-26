@@ -31,6 +31,13 @@ Follow [godot-plus-plus](https://github.com/nikoladevelops/godot-plus-plus/tree/
 ## How to use StatPool
 Check the [Wiki](https://github.com/shoyguer/stat-pool/wiki) for information on how to use this plugin.
 
+### Class reference
+- [Class Reference](https://github.com/shoyguer/stat-pool/wiki/1.-Class-Reference)
+
+### Usage Examples
+- [GDScript](https://github.com/shoyguer/stat-pool/wiki/2.1.-GDScript-Code-Example)
+- [C#](https://github.com/shoyguer/stat-pool/wiki/2.2.-C%23-code-example)
+
 ## Support
 If this plugin helped you, please, consider:
 - ⭐ Star this repository
