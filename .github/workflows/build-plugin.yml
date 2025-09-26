@@ -312,24 +312,9 @@ jobs:
         run: |
           # Create the release with the specified tag and name
           gh release create "${{ github.event.inputs.version }}" \
-            --title "${{ github.event.inputs.version }} - Release" \
-            --notes "## Release ${{ github.event.inputs.version }}
-
-          Automated release of ${{ env.PLUGIN_NAME }} version ${{ github.event.inputs.version }}.
-
-          ### Build Configuration:
-          - Build Type: ${{ github.event.inputs.build_type }}
-          - Float Precision: ${{ github.event.inputs.precision }}
-          - LTO: ${{ github.event.inputs.lto }}
+            --title "v${{ github.event.inputs.version }} - Release" \
+            --notes "## Stat Pool v${{ github.event.inputs.version }}
 
           ### Installation:
-          1. Download the \`${{ env.PLUGIN_NAME }}.zip\` file below
-          2. Extract it to your Godot project's \`addons/\` directory
-          3. Enable the plugin in your project settings
-
-          ### What's included:
-          - Cross-platform binaries for all supported platforms
-          - Plugin configuration files
-          - Documentation and license" \
-            --target "${{ github.ref }}" \
-            "${{ env.PLUGIN_NAME }}.zip"
+          1. Download the `${{ env.PLUGIN_NAME }}.zip` file below
+          2. Extract it to your Godot project's `addons` directory
