@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://hn8dh5y3yq6a"]
+[gd_scene load_steps=3 format=3 uid="uid://hn8dh5y3yq6a"]
 
 [ext_resource type="Script" uid="uid://gscsivoywwwo" path="res://main.gd" id="1_ig7tw"]
 
+[sub_resource type="StatPool" id="StatPool_ig7tw"]
+max_val = 150
+val = 150
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ig7tw")
+stat_pool = SubResource("StatPool_ig7tw")

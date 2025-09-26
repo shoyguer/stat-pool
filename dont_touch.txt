@@ -1,3 +1,3 @@
-plugin_name
-GODOT_VERSION_GOES_HERE
-GODOT_ENGINE_PATH_GOES_HERE
+stat_pool
+4.5
+D:\Software\Godot 4.5 Mono\Godot_v4.5-stable_mono_win64.exe

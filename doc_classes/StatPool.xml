@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="StatPool" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Pool stat management component.
+	</brief_description>
+	<description>
+		Component for tracking any numeric stat pool, for example: health, stamina, hunger, etc, where you have current, maximum and minimum values.
+		Handles value modifications, boundary management, and emits various signals for value changes.
+
+		Check the [url=https://github.com/shoyguer/godot-stat-pool][b]Official Repository[/b][/url] for more information.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="decrease">
+			<return type="void" />
+			<param index="0" name="amount" type="int" />
+			<description>
+				Decreases [value] by the specified amount in [param amount].
+			</description>
+		</method>
+		<method name="deplete">
+			<return type="void" />
+			<description>
+				Completely depletes [value], setting its value to equal [member min_value].
+			</description>
+		</method>
+		<method name="fill">
+			<return type="void" />
+			<description>
+				Completely fills [member value], setting its value to equal [member max_value].
+			</description>
+		</method>
+		<method name="get_percentage" qualifiers="const">
+			<return type="float" />
+			<description>
+				Returns the current [member value] as a percentage (0.0 to 1.0) relative to the range between [member min_value] and [member max_value].
+			</description>
+		</method>
+		<method name="increase">
+			<return type="void" />
+			<param index="0" name="amount" type="int" />
+			<description>
+				Increases [member value] by the specified amount in [param amount].
+			</description>
+		</method>
+		<method name="is_depleted" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Returns [code]true[/code] if [member value] is at [member min_value].
+			</description>
+		</method>
+		<method name="is_filled" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Returns [code]true[/code] if [member value] is at [member max_value].
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="max_value" type="int" setter="set_max_value" getter="get_max_value" default="100">
+			Maximum possible stat value.
+			If it ever goes below or equal [member min_value], then [member min_value] will be automatically adjusted to exactly 1 integer below [member max_value].
+			[b]Example:[/b] If [member min_value] is 0 and you set [member max_value] to 0, then [member min_value] will be adjusted to -1.
+		</member>
+		<member name="min_value" type="int" setter="set_min_value" getter="get_min_value" default="0">
+			Minimum possible stat value.
+			If it ever goes above or equal [member max_value], then [member max_value] will be automatically adjusted to exactly 1 integer above [member min_value].
+			[b]Example:[/b] If [member max_value] is 100 and you set [member min_value] to 100, then [member max_value] will be adjusted to 101.
+		</member>
+		<member name="value" type="int" setter="set_value" getter="get_value" default="100">
+			Current stat value. Automatically clamped between [member min_value] and [member max_value] when set.
+		</member>
+	</members>
+	<signals>
+		<signal name="depleted">
+			<param index="0" name="stat" type="StatPool" />
+			<description>
+				Signal emitted when [member value] reaches [member min_value].
+			</description>
+		</signal>
+		<signal name="max_value_changed">
+			<param index="0" name="old_max" type="int" />
+			<param index="1" name="new_max" type="int" />
+			<param index="2" name="increased" type="bool" />
+			<description>
+				Signal emitted when [member max_value] changes.
+				[param old_max] - Represents the previous maximum value before the change.
+				[param new_max] - Represents the new maximum value after the change.
+				[param increased] - Indicates whether the maximum value was increased ([code]true[/code]) or decreased ([code]false[/code]).
+			</description>
+		</signal>
+		<signal name="min_value_changed">
+			<param index="0" name="old_min" type="int" />
+			<param index="1" name="new_min" type="int" />
+			<param index="2" name="increased" type="bool" />
+			<description>
+				Signal emitted when [member min_value] changes.
+				[param old_min] - Represents the previous minimum value before the change.
+				[param new_min] - Represents the new minimum value after the change.
+				[param increased] - Indicates whether the minimum value was increased ([code]true[/code]) or decreased ([code]false[/code]).
+			</description>
+		</signal>
+		<signal name="restored">
+			<param index="0" name="stat" type="StatPool" />
+			<description>
+				Signal emitted when [member value] changes from [member min_value] to any higher value.
+			</description>
+		</signal>
+		<signal name="restored_fully">
+			<param index="0" name="stat" type="StatPool" />
+			<description>
+				Signal emitted when [member value] reaches its maximum value [member max_value].
+			</description>
+		</signal>
+		<signal name="value_changed">
+			<param index="0" name="old_value" type="int" />
+			<param index="1" name="new_value" type="int" />
+			<param index="2" name="increased" type="bool" />
+			<description>
+				Signal emitted when [member value] changes.
+				[param old_value] - Represents the previous value before the change.
+				[param new_value] - Represents the new value after the change.
+				[param increased] - Indicates whether the value was increased ([code]true[/code]) or decreased ([code]false[/code]).
+			</description>
+		</signal>
+	</signals>
+</class>
