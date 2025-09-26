@@ -1,7 +1,7 @@
 # StatPool
 A simple, efficient stat management system for Godot games. Perfect for health bars, mana pools, stamina systems, hunger meters, or any numeric stat that needs min/max bounds and signal notifications.
 
-![Header Image]([images\header_image.png](https://github.com/shoyguer/stat-pool/blob/main/images/header_image.png?raw=true))
+![Header Image](https://raw.githubusercontent.com/shoyguer/stat-pool/refs/heads/main/images/header_image.png)
 
 ## Why Use StatPool?
 Managing stats in games is annoying. You always end up writing the same code over and over:
