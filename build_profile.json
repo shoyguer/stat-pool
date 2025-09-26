@@ -6,6 +6,7 @@
         "ClassDB",
         "Container",
         "Control",
+        "CSharpScript",
         "EditorPlugin",
         "Engine",
         "FileAccess",

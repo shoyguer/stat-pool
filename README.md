@@ -10,6 +10,8 @@ Managing stats in games is annoying. You always end up writing the same code ove
 
 StatPool handles all of this for you in C++, making it faster and cleaner than doing it in GDScript every time.
 
+**WARNING** : If you intend to use this plugin with C#, beaware that it will be kinda clunky as of now. I'll soon have it fixed. But for now, you can have a look usage example inside the **How to use it** section.
+
 
 ## Why C++ Instead of GDScript?
 Simple - performance. If you have 100+ enemies each with health/mana/stamina stats, that's 300+ StatPools that need to be managed. C++ handles this way better than GDScript.
@@ -31,19 +33,18 @@ Follow [godot-plus-plus](https://github.com/nikoladevelops/godot-plus-plus/tree/
 
 ## Code Reference
 ### Methods
-- `init(min, max, value)` - Initialize with all values
-- `increase(amount)` - Add to current value
-- `decrease(amount)` - Subtract from current value  
-- `fill()` - Set to maximum value
-- `deplete()` - Set to minimum value
-- `get_percentage()` - Returns 0.0 to 1.0
-- `is_filled()` - True if at maximum
-- `is_depleted()` - True if at minimum
+- `increase(amount)` - Add `amount` to current `value`
+- `decrease(amount)` - Subtract `amount` from current `value ` 
+- `fill()` - Set `value` to maximum value
+- `deplete()` - Set `value` to minimum value
+- `get_percentage()` - Returns percentage of the `value` in relation to `min_value` and `max_value`. Goes from `0.0` to `1.0`
+- `is_filled()` - Returns `true` if at maximum. `false` if not.
+- `is_depleted()` - Returns `true` if at minimum. `false` if not.
 
 ### Properties
-- `value` - Current value (clamped)
-- `min_value` - Minimum allowed value
-- `max_value` - Maximum allowed value
+- `value` - Current value (limited by `min_value` and `max_value`)
+- `min_value` - Minimum allowed `value`
+- `max_value` - Maximum allowed `value`
 
 ### Signals
 - `value_changed(old_value, new_value, increased)` - When value changes
@@ -56,6 +57,10 @@ Follow [godot-plus-plus](https://github.com/nikoladevelops/godot-plus-plus/tree/
 
 ## How to Use it
 ### Basic Health System
+
+<details>
+<summary><strong>GDScript</strong></summary>
+
 ```gdscript
 # Create a health stat
 var health = StatPool.new(0, 100, 80) # min=0, max=100, current=80
@@ -90,7 +95,72 @@ func _on_resurrected():
     print("Respawn player")
 ```
 
+</details>
+
+<details>
+<summary><strong>C#</strong></summary>
+
+```csharp
+using Godot;
+
+public partial class HealthSystem : Node
+{
+    // Create a health stat
+    private Resource health;
+    private ProgressBar healthBar; // Assuming you have a health bar UI element
+    
+    public override void _Ready()
+    {
+        // Create StatPool with min=0, max=100, current=80
+        health = ClassDB.Instantiate("StatPool").As<Resource>();
+        health.Set("min_value", 0);
+        health.Set("max_value", 100);
+        health.Set("value", 80);
+        
+        // Signal connections
+        health.Connect("value_changed", new Callable(this, nameof(OnHealthChanged)));
+        health.Connect("depleted", new Callable(this, nameof(OnPlayerDied)));
+        health.Connect("fully_restored", new Callable(this, nameof(OnResurrected)));
+        
+        Examples();
+    }
+    
+    // Example for how to use this plugin
+    private void Examples()
+    {
+        // Take damage
+        health.Call("decrease", 25);
+        // Heal
+        health.Call("increase", 10);
+        // 0.65 (65%)
+        GD.Print(health.Call("get_percentage"));
+    }
+    
+    private void OnHealthChanged(int oldValue, int newValue, bool increased)
+    {
+        if (healthBar != null)
+            healthBar.Value = health.Call("get_percentage").AsSingle() * 100;
+    }
+    
+    private void OnPlayerDied(Resource stat)
+    {
+        GD.Print("Game Over!");
+    }
+    
+    private void OnResurrected(Resource stat)
+    {
+        GD.Print("Respawn player");
+    }
+}
+```
+
+</details>
+
 ### Stamina System
+
+<details>
+<summary><strong>GDScript</strong></summary>
+
 ```gdscript
 var stamina = StatPool.new() # Default start: min=0, max=100, current=100
 var running: bool = false
@@ -108,7 +178,53 @@ func _process(delta):
         stamina.increase(20 * delta)  # Regenerate
 ```
 
+</details>
+
+<details>
+<summary><strong>C#</strong></summary>
+
+```csharp
+using Godot;
+
+public partial class StaminaSystem : Node
+{
+    private Resource stamina; // Default start: min=0, max=100, current=100
+    private bool running = false;
+    
+    public override void _Ready()
+    {
+        // Create default StatPool (min=0, max=100, current=100)
+        stamina = ClassDB.Instantiate("StatPool").As<Resource>();
+    }
+    
+    // Drain stamina while running
+    public override void _Process(double delta)
+    {
+        if (Input.IsActionPressed("run") && !stamina.Call("is_depleted").AsBool())
+        {
+            running = true;
+            stamina.Call("decrease", 30 * delta);
+        }
+        else
+        {
+            running = false;
+        }
+        
+        if (!running && !stamina.Call("is_filled").AsBool())
+        {
+            stamina.Call("increase", 20 * delta);  // Regenerate
+        }
+    }
+}
+```
+
+</details>
+
 ### Hunger System
+
+<details>
+<summary><strong>GDScript</strong></summary>
+
 ```gdscript
 var health := StatPool.new() # Default start: min=0, max=100, current=100
 var hunger = StatPool.new(0, 100, 50) # min=0, max=100, current=50
@@ -128,6 +244,50 @@ func eat_apple():
 func _on_starving(stat):
     health.deplete()
 ```
+
+</details>
+
+<details>
+<summary><strong>C#</strong></summary>
+
+```csharp
+using Godot;
+
+public partial class HungerSystem : Node
+{
+    private Resource health; // Default start: min=0, max=100, current=100
+    private Resource hunger; // min=0, max=100, current=50
+    
+    public override void _Ready()
+    {
+        // Create default health StatPool (min=0, max=100, current=100)
+        health = ClassDB.Instantiate("StatPool").As<Resource>();
+        
+        // Create hunger StatPool with min=0, max=100, current=50
+        hunger = ClassDB.Instantiate("StatPool").As<Resource>();
+        hunger.Set("min_value", 0);
+        hunger.Set("max_value", 100);
+        hunger.Set("value", 50);
+        
+        // Signal connection
+        hunger.Connect("depleted", new Callable(this, nameof(OnStarving)));
+    }
+    
+    // Eat food
+    public void EatApple()
+    {
+        hunger.Call("increase", 25);
+    }
+    
+    // Will die if is starving
+    private void OnStarving(Resource stat)
+    {
+        health.Call("deplete");
+    }
+}
+```
+
+</details>
 
 ## Support
 If this plugin helped you, please, consider:

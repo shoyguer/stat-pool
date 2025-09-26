@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 ## Test scene for StatPool functionality demonstration.
 
@@ -9,7 +8,6 @@ extends Node2D
 
 ## Runs StatPool tests and creates health example.
 func _ready() -> void:
-	
 	connect_signals()
 	run_tests()
 	create_health_example()
