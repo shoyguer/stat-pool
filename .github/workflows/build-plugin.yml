@@ -135,12 +135,6 @@ jobs:
         with:
           submodules: true
 
-      - name: Download updated files
-        uses: actions/download-artifact@v4
-        with:
-          name: updated-files
-          path: ./
-
       - name: Set build name
         id: set-build-name
         shell: bash
