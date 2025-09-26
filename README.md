@@ -10,7 +10,10 @@ Managing stats in games is annoying. You always end up writing the same code ove
 
 StatPool handles all of this for you in C++, making it faster and cleaner than doing it in GDScript every time.
 
-**WARNING** : If you intend to use this plugin with C#, beaware that it will be kinda clunky as of now. I'll soon have it fixed. But for now, you can have a look usage example inside the **How to use it** section.
+___
+### WARNING
+If you intend to use this plugin with C#, beaware that it will be kinda clunky as of now. I'll soon have it fixed. But for now, you can have a look usage example inside the **How to use it** section.
+___
 
 
 ## Why C++ Instead of GDScript?
