@@ -23,9 +23,7 @@ Simple - performance. If you have 100+ enemies each with health/mana/stamina sta
 (Also because I did this plugin to challange myself, since it's been a good 8 years since the last time I coded anything C++ related.)
 
 ## Requirements
-- [Godot 4.3+](https://godotengine.org/) (might work on earlier versions, I haven't tested)
-or
-- [Redot 4.3+](https://www.redotengine.org/)
+- [Godot 4.5](https://godotengine.org/) (might work on earlier versions, I haven't tested)
 
 ## Building From Source
 Only needed if you want to modify the plugin.
@@ -55,5 +53,6 @@ If this plugin helped you, please, consider:
 - 🐛 Report bugs in Issues
 - 💡 Suggest improvements
 
+___
 
 And a BIG thanks to [Nikich](https://github.com/nikoladevelops) for his [godot-plus-plus](https://github.com/nikoladevelops/godot-plus-plus) template.
