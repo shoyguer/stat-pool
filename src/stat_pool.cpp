@@ -1,3 +1,6 @@
+// MIT License
+// Copyright (c) 2025 Lucas "Shoyguer" Melo
+
 #include "stat_pool.hpp"
 #include "godot_cpp/core/class_db.hpp"
 

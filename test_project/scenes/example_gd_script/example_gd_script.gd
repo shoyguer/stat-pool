@@ -1,3 +1,6 @@
+# MIT License
+# Copyright (c) 2025 Lucas "Shoyguer" Melo
+
 extends Node2D
 ## Test scene for StatPool functionality demonstration.
 

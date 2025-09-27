@@ -1,3 +1,6 @@
+// MIT License
+// Copyright (c) 2025 Lucas "Shoyguer" Melo
+
 // Include your classes, that you want to expose to Godot
 #include "stat_pool.hpp"
 #include <gdextension_interface.h>
