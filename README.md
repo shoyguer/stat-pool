@@ -17,7 +17,7 @@ Managing stats in games is annoying. You always end up writing the same code ove
 | **Mobile** | 🤖 Android • 📱 iOS |
 | **Others** | 🌐 Web |
 
-## Why C++ Instead of GDScript?
+## Why GDExtension Instead of GDScript?
 Simple - performance. If you have 100+ enemies each with health/mana/stamina stats, that's 300+ StatPools that need to be managed. C++ handles this way better than GDScript.
 
 (Also because I did this plugin to challange myself, since it's been a good 8 years since the last time I coded anything C++ related.)
