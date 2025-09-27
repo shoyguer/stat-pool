@@ -317,4 +317,5 @@ jobs:
 
           ### Installation:
           1. Download the \`${{ env.PLUGIN_NAME }}.zip\` file below
-          2. Extract it to your Godot project's \`addons\` directory
+          2. Extract it to your Godot project's \`addons\` directory \
+            "${{ env.PLUGIN_NAME }}.zip"
