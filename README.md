@@ -20,7 +20,7 @@ This is a GDExtension plugin, this means it was done with performance in mind.
 | **Others** | 🌐 Web |
 
 ## Requirements
-- [Godot 4.5](https://godotengine.org/) (might work on earlier versions, I haven't tested)
+- [Godot 4.5](https://godotengine.org/)
 
 ## Building From Source
 Only needed if you want to modify the plugin.
