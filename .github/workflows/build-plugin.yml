@@ -58,7 +58,7 @@ on:
         default: false
 
 env:
-  PLUGIN_NAME: "seed" # Replace with your plugin name (must match .gdextension file name)
+  PLUGIN_NAME: "stat_pool" # Replace with your plugin name (must match .gdextension file name)
 
 jobs:
   set-matrix:
