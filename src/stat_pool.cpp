@@ -6,13 +6,14 @@
 
 using namespace godot;
 
-// Constructor
+
+// Initializes StatPool with default values
 StatPool::StatPool() : min_value(0), max_value(100), value(100)
 {
     // Default initialization with min_value = 0, max_value = 100, value = 100
 }
 
-// Value Management
+// Sets minimum value, auto-adjusts max if needed, and clamps current value
 void StatPool::set_min_value(int new_min)
 {
     if (new_min == min_value) return;
@@ -34,6 +35,7 @@ void StatPool::set_min_value(int new_min)
     emit_signal("min_value_changed", old_min, min_value, increased);
 }
 
+// Sets maximum value, auto-adjusts min if needed, and clamps current value
 void StatPool::set_max_value(int new_max) 
 {
     if (new_max == max_value) return;
@@ -55,6 +57,7 @@ void StatPool::set_max_value(int new_max)
     emit_signal("max_value_changed", old_max, max_value, increased);
 }
 
+// Sets current value with clamping and emits appropriate signals
 void StatPool::set_value(int new_value) 
 {
     if (new_value == value) return;
@@ -74,32 +77,38 @@ void StatPool::set_value(int new_value)
     }
 }
 
+// Increases value by specified amount
 void StatPool::increase(int amount) 
 {
     set_value(value + amount);
 }
 
+// Decreases value by specified amount
 void StatPool::decrease(int amount) 
 {
     set_value(value - amount);
 }
 
+// Sets value to maximum
 void StatPool::fill() 
 {
     set_value(max_value);
 }
 
+// Sets value to minimum
 void StatPool::deplete() 
 {
     set_value(min_value);
 }
 
+// Returns current value as percentage (0.0 to 1.0) between min and max
 float StatPool::get_percentage() const 
 {
     int range = max_value - min_value;
     return static_cast<float>(value - min_value) / static_cast<float>(range);
 }
 
+// Clamps value between min and max bounds
 int StatPool::clamp_value(int val, int min_val, int max_val) const 
 {
     if (val < min_val) return min_val;
@@ -107,7 +116,7 @@ int StatPool::clamp_value(int val, int min_val, int max_val) const
     return val;
 }
 
-// Bind methods for GDScript access
+// Registers methods, properties, and signals for Godot access
 void StatPool::_bind_methods() 
 {
     // Methods

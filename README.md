@@ -49,9 +49,18 @@ Or jump to whatever you need:
 #### Class reference
 - [Class Reference](https://github.com/shoyguer/stat-pool/wiki/1.-Class-Reference)
 
-#### Usage Examples
-- [GDScript](https://github.com/shoyguer/stat-pool/wiki/2.1.-GDScript-Code-Example)
-- [C#](https://github.com/shoyguer/stat-pool/wiki/2.2.-C%23-code-example)
+#### Wiki
+- [Class Reference](https://github.com/shoyguer/stat-pool/wiki/1.-Class-Reference)
+- [Code Examples](https://github.com/shoyguer/stat-pool/wiki/2.1.-GDScript-Code-Example)
+
+## Other Plugins
+Check out my other Godot plugins:
+
+| Plugin | Description |
+|--------|-------------|
+| [<img src="https://raw.githubusercontent.com/shoyguer/seed/refs/heads/main/brand/header_image.png" width="192">](https://github.com/shoyguer/seed) | Seed generation system |
+| [<img src="https://raw.githubusercontent.com/shoyguer/time-tick/refs/heads/main/brand/header_image.png" width="192">](https://github.com/shoyguer/time-tick) | Flexible time management system |
+
 
 ## Support
 If this plugin helped you, please, consider:
