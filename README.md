@@ -50,8 +50,7 @@ Or jump to whatever you need:
 - [Class Reference](https://github.com/shoyguer/stat-pool/wiki/1.-Class-Reference)
 
 #### Wiki
-- [Class Reference](https://github.com/shoyguer/stat-pool/wiki/1.-Class-Reference)
-- [Code Examples](https://github.com/shoyguer/stat-pool/wiki/2.1.-GDScript-Code-Example)
+- [Code Example](https://github.com/shoyguer/stat-pool/wiki/2.1.-GDScript-Code-Example)
 
 ## Other Plugins
 Check out my other Godot plugins:
