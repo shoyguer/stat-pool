@@ -57,6 +57,7 @@ Check out my other Godot plugins:
 |--------|-------------|
 | [<img src="https://raw.githubusercontent.com/shoyguer/seed/refs/heads/main/brand/header_image.png" width="192">](https://github.com/shoyguer/seed) | Seed generation system |
 | [<img src="https://raw.githubusercontent.com/shoyguer/time-tick/refs/heads/main/brand/header_image.png" width="192">](https://github.com/shoyguer/time-tick) | Flexible time management system |
+| [<img src="https://raw.githubusercontent.com/shoyguer/advanced-button/refs/heads/main/src/brand/header_image.png" width="192">](https://github.com/shoyguer/advanced-button) | Complete and Customizeable button with useful features |
 
 
 ## Support
