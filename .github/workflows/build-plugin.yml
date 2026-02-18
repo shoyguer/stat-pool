@@ -58,7 +58,7 @@ on:
         default: false
 
 env:
-  PLUGIN_NAME: "stat_pool" # Replace with your plugin name (must match .gdextension file name)
+  PLUGIN_NAME: "stat_pool"
 
 jobs:
   set-matrix:
@@ -281,7 +281,11 @@ jobs:
 
       # Create zip archive
       - name: Create zip archive
-        run: zip -r "${{ env.PLUGIN_NAME }}_${{ github.event.inputs.version }}.zip" "addons"
+        run: |
+          WRAPPER="${{ env.PLUGIN_NAME }}_${{ github.event.inputs.version }}"
+          mkdir -p "$WRAPPER"
+          cp -R addons "$WRAPPER/"
+          zip -r "${WRAPPER}.zip" "$WRAPPER/"
 
       # Upload final artifact
       - name: Upload final artifact
@@ -300,6 +304,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Read plugin info
+        id: godot-version
+        run: |
+          echo "version=$(sed -n '2p' dont_touch.txt)" >> $GITHUB_OUTPUT
+          echo "plugin_name=$(sed -n '3p' dont_touch.txt)" >> $GITHUB_OUTPUT
+
       - name: Download release artifact
         uses: actions/download-artifact@v4
         with:
@@ -313,7 +323,9 @@ jobs:
           # Create the release with the specified tag and name
           gh release create "${{ github.event.inputs.version }}" \
             --title "v${{ github.event.inputs.version }} - Release" \
-            --notes "## Stat Pool v${{ github.event.inputs.version }}
+            --notes "## ${{ steps.godot-version.outputs.plugin_name }} v${{ github.event.inputs.version }}
+          
+          For Godot ${{ steps.godot-version.outputs.version }}.x only.
 
           ### Installation:
           1. Download the \`${{ env.PLUGIN_NAME }}_${{ github.event.inputs.version }}.zip\` file below

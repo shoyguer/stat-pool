@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://hn8dh5y3yq6a"]
+[gd_scene format=3 uid="uid://hn8dh5y3yq6a"]
 
 [ext_resource type="Script" uid="uid://gscsivoywwwo" path="res://scenes/example_gd_script/example_gd_script.gd" id="1_052x8"]
 
 [sub_resource type="StatPool" id="StatPool_052x8"]
 
-[node name="ExampleGDScript" type="Node2D"]
+[node name="ExampleGDScript" type="Node2D" unique_id=925484406]
 script = ExtResource("1_052x8")
 stat_pool = SubResource("StatPool_052x8")

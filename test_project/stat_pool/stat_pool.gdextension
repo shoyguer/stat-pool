@@ -1,6 +1,6 @@
 [configuration]
 entry_symbol = "stat_pool_init"
-compatibility_minimum = "4.5"
+compatibility_minimum = "4.6"
 
 [icons]
 StatPool = "./stat_pool.svg"
