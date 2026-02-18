@@ -22,7 +22,7 @@ This is a GDExtension plugin, this means it was done with performance in mind.
 ## Requirements
 - [Godot 4.6](https://godotengine.org/).
 
-Check [Releases](https://github.com/shoyguer/big-number/releases) for older versions.
+Check [Releases](https://github.com/shoyguer/stat-pool/releases) for older versions.
 
 ## Building From Source
 Only needed if you want to modify the plugin.
